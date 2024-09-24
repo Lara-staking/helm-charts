@@ -4,6 +4,10 @@
 
 replicaCount: 1
 
+secrets:
+  enabled: true
+  privateKey: ""
+
 image:
   repository: elodtaraxa/lara-indexer
   tag: v1.0.5

@@ -19,6 +19,9 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        envFrom:
+          - secretRef:
+              name: {{ include "lara-indexer.fullname" . }}
         args:
         - -data_dir
         - {{ .Values.indexer.dataDir }}
@@ -31,7 +34,7 @@ spec:
         - -validators_yield_saving_interval
         - {{ .Values.indexer.validatorsYieldSavingInterval | quote }}
         - -signing_key
-        - {{ .Values.indexer.signingKey }}
+        - $(PRIVATE_KEY)
         - -oracle_address
         - {{ .Values.indexer.oracleAddress }}
         - -lara_address
