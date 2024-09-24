@@ -22,6 +22,8 @@ spec:
         envFrom:
           - secretRef:
               name: {{ include "lara-indexer.fullname" . }}
+        command:
+        - /taraxa-indexer
         args:
         - -data_dir
         - {{ .Values.indexer.dataDir }}
