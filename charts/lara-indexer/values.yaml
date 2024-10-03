@@ -79,7 +79,7 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector:
-  cloud.google.com/gke-nodepool: blockchain-prnet
+  cloud.google.com/gke-nodepool: blockchain-testnet
 
 tolerations: []
 
@@ -90,11 +90,11 @@ affinity: {}
 
 indexer:
   dataDir: /data
-  blockchainWs: ws://pr-2609-taraxa-node:8777
-  chainId: "200"
+  blockchainWs: ws://blockchain-taraxa-node:8777
+  chainId: "841"
   yieldSavingInterval: "999"
   validatorsYieldSavingInterval: "999"
   signingKey: xxx
-  oracleAddress: "0xd170c33a27A9C3cb599d9B41970DAD2AaCeE96e2"
-  laraAddress: "0x397F45dCaC0DC00cb927d8eCE7d449F726A517cF"
+  oracleAddress: "0xd6F1DbeC984e845d6088Ca9de6cdfD6670F2c300"
+  laraAddress: "0x2057B7D8Cf6C5750e018F69C49dd65e5454e1016"
   graphQLEndpoint: "https://indexer.prnet.taraxa.io/subgraphs/name/Liquid-staking/lara-subgraph"
