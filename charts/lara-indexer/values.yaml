@@ -10,7 +10,7 @@ secrets:
 
 image:
   repository: elodtaraxa/lara-indexer
-  tag: v1.0.5
+  tag: v1.0.9
   pullPolicy: Always
 
 imagePullSecrets: []
