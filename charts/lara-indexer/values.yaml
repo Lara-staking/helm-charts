@@ -10,7 +10,7 @@ secrets:
 
 image:
   repository: elodtaraxa/lara-indexer
-  tag: v1.0.9
+  tag: v1.0.10
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -91,9 +91,9 @@ affinity: {}
 indexer:
   dataDir: /data
   blockchainWs: ws://blockchain-taraxa-node:8777
-  chainId: "841"
-  yieldSavingInterval: "999"
-  validatorsYieldSavingInterval: "999"
+  chainId: "842"
+  yieldSavingInterval: "28800"
+  validatorsYieldSavingInterval: "28800"
   signingKey: xxx
   oracleAddress: "0xd6F1DbeC984e845d6088Ca9de6cdfD6670F2c300"
   laraAddress: "0x2057B7D8Cf6C5750e018F69C49dd65e5454e1016"
