@@ -10,7 +10,7 @@ secrets:
 
 image:
   repository: elodtaraxa/lara-indexer
-  tag: v1.0.20-testnet
+  tag: v1.2.0
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -98,3 +98,5 @@ indexer:
   oracleAddress: "0x83BA75e668B479376973F4C7B0D240E4b5B25237"
   laraAddress: "0xa0ACAa383Aa22Eb0C93b115344C05409BBBE68d6"
   graphQLEndpoint: "https://indexer.prnet.taraxa.io/subgraphs/name/Liquid-staking/lara-subgraph"
+  laraEnabled: false
+  generalBlockTime: 3600

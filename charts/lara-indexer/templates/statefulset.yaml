@@ -45,6 +45,11 @@ spec:
         - {{ .Values.indexer.graphQLEndpoint }}
         - -sync_queue_limit
         - '1'
+        {{- if .Values.indexer.laraEnabled }}
+        - -lara_enabled
+        {{- end }}
+        - -general_block_time
+        - {{ .Values.indexer.generalBlockTime | quote }}
         volumeMounts:
         - name: indexer-data
           mountPath: {{ .Values.indexer.dataDir }}
