@@ -16,7 +16,7 @@ spec:
         {{- include "lara-indexer.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: {{ .Chart.Name }}-{{ if .Values.indexer.laraEnabled }}lara-enabled{{ else }}lara-disabled{{ end }}
+      - name: {{ .Chart.Name }}-lara-enabled
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         envFrom:
@@ -45,15 +45,13 @@ spec:
         - {{ .Values.indexer.graphQLEndpoint }}
         - -sync_queue_limit
         - '1'
-        {{- if .Values.indexer.laraEnabled }}
         - -lara_enabled
-        {{- end }}
         - -general_block_time
         - {{ .Values.indexer.generalBlockTime | quote }}
         volumeMounts:
         - name: indexer-data
           mountPath: {{ .Values.indexer.dataDir }}
-      - name: {{ .Chart.Name }}-{{ if .Values.indexer.laraEnabled }}lara-enabled{{ else }}lara-disabled{{ end }}
+      - name: {{ .Chart.Name }}-lara-disabled
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         envFrom:
@@ -82,9 +80,6 @@ spec:
         - {{ .Values.indexer.graphQLEndpoint }}
         - -sync_queue_limit
         - '1'
-        {{- if .Values.indexer.laraEnabled }}
-        - -lara_enabled
-        {{- end }}
         - -general_block_time
         - {{ .Values.indexer.generalBlockTime | quote }}
         volumeMounts:
