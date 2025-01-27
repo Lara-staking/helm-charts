@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "lara-indexer.fullname" . }}
+  name: {{ include "lara-indexer.fullname" . }}-lara-disabled
   labels:
     {{- include "lara-indexer.labels" . | nindent 4 }}
 spec:
-  serviceName: {{ include "lara-indexer.fullname" . }}
+  serviceName: {{ include "lara-indexer.fullname" . }}-lara-disabled
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
