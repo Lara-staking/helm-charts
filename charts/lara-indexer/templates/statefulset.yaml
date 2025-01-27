@@ -16,7 +16,44 @@ spec:
         {{- include "lara-indexer.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: {{ .Chart.Name }}
+      - name: {{ .Chart.Name }}-{{ if .Values.indexer.laraEnabled }}lara-enabled{{ else }}lara-disabled{{ end }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        envFrom:
+          - secretRef:
+              name: {{ include "lara-indexer.fullname" . }}
+        command:
+        - /taraxa-indexer
+        args:
+        - -data_dir
+        - {{ .Values.indexer.dataDir }}
+        - -blockchain_ws
+        - {{ .Values.indexer.blockchainWs }}
+        - -chain_id
+        - {{ .Values.indexer.chainId | quote }}
+        - -yield_saving_interval
+        - {{ .Values.indexer.yieldSavingInterval | quote }}
+        - -validators_yield_saving_interval
+        - {{ .Values.indexer.validatorsYieldSavingInterval | quote }}
+        - -signing_key
+        - $(PRIVATE_KEY)
+        - -oracle_address
+        - {{ .Values.indexer.oracleAddress }}
+        - -lara_address
+        - {{ .Values.indexer.laraAddress }}
+        - -graphQLEndpoint
+        - {{ .Values.indexer.graphQLEndpoint }}
+        - -sync_queue_limit
+        - '1'
+        {{- if .Values.indexer.laraEnabled }}
+        - -lara_enabled
+        {{- end }}
+        - -general_block_time
+        - {{ .Values.indexer.generalBlockTime | quote }}
+        volumeMounts:
+        - name: indexer-data
+          mountPath: {{ .Values.indexer.dataDir }}
+      - name: {{ .Chart.Name }}-{{ if .Values.indexer.laraEnabled }}lara-enabled{{ else }}lara-disabled{{ end }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         envFrom:
