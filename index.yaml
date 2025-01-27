@@ -3,6 +3,16 @@ entries:
   lara-indexer:
   - apiVersion: v2
     appVersion: 1.2.0
+    created: "2025-01-27T21:11:46.308349806Z"
+    description: A Helm chart for Kubernetes
+    digest: 67c8d3d7f76b2a8a9a151e82afa02e8c4bc2ef684181227c4cd0579650f5cb3c
+    name: lara-indexer
+    type: application
+    urls:
+    - https://github.com/Lara-staking/helm-charts/releases/download/lara-indexer-0.3.1/lara-indexer-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
+    appVersion: 1.2.0
     created: "2025-01-27T16:59:22.098050611Z"
     description: A Helm chart for Kubernetes
     digest: d8599a138fec4c0b654d6b80764d64d82c3de77b840bb90274989f7641442955
@@ -81,4 +91,4 @@ entries:
     urls:
     - https://github.com/Lara-staking/helm-charts/releases/download/lara-indexer-0.1.0/lara-indexer-0.1.0.tgz
     version: 0.1.0
-generated: "2025-01-27T16:59:22.098087721Z"
+generated: "2025-01-27T21:11:46.308405651Z"
