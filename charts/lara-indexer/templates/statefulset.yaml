@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "lara-indexer.fullname" . }}-lara-disabled
+  name: {{ include "lara-indexer.fullname" . }}
   labels:
     {{- include "lara-indexer.labels" . | nindent 4 }}
 spec:
-  serviceName: {{ include "lara-indexer.fullname" . }}-lara-disabled
+  serviceName: {{ include "lara-indexer.fullname" . }}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -16,7 +16,7 @@ spec:
         {{- include "lara-indexer.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: {{ .Chart.Name }}-lara-disabled
+      - name: {{ .Chart.Name }}-lara
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         envFrom:
@@ -25,28 +25,21 @@ spec:
         command:
         - /taraxa-indexer
         args:
-        - -data_dir
-        - {{ .Values.indexer.dataDir }}
-        - -blockchain_ws
-        - {{ .Values.indexer.blockchainWs }}
-        - -chain_id
-        - {{ .Values.indexer.chainId | quote }}
-        - -yield_saving_interval
-        - {{ .Values.indexer.yieldSavingInterval | quote }}
-        - -validators_yield_saving_interval
-        - {{ .Values.indexer.validatorsYieldSavingInterval | quote }}
-        - -signing_key
-        - $(PRIVATE_KEY)
-        - -oracle_address
-        - {{ .Values.indexer.oracleAddress }}
-        - -lara_address
-        - {{ .Values.indexer.laraAddress }}
-        - -graphQLEndpoint
-        - {{ .Values.indexer.graphQLEndpoint }}
-        - -sync_queue_limit
-        - '1'
-        - -general_block_time
-        - {{ .Values.indexer.generalBlockTime | quote }}
+        {{- include "lara-indexer.args" . | nindent 8 }}
+        - -lara_enabled
+        volumeMounts:
+        - name: indexer-data
+          mountPath: {{ .Values.indexer.dataDir }}
+      - name: {{ .Chart.Name }}-indexer
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        envFrom:
+          - secretRef:
+              name: {{ include "lara-indexer.fullname" . }}
+        command:
+        - /taraxa-indexer
+        args:
+        {{- include "lara-indexer.args" . | nindent 8 }}
         volumeMounts:
         - name: indexer-data
           mountPath: {{ .Values.indexer.dataDir }}

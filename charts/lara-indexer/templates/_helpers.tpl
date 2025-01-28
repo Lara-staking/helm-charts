@@ -60,3 +60,31 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Indexer args
+*/}}
+{{- define "lara-indexer.args" -}}
+- -data_dir
+- {{ .Values.indexer.dataDir }}
+- -blockchain_ws
+- {{ .Values.indexer.blockchainWs }}
+- -chain_id
+- {{ .Values.indexer.chainId | quote }}
+- -yield_saving_interval
+- {{ .Values.indexer.yieldSavingInterval | quote }}
+- -validators_yield_saving_interval
+- {{ .Values.indexer.validatorsYieldSavingInterval | quote }}
+- -signing_key
+- $(PRIVATE_KEY)
+- -oracle_address
+- {{ .Values.indexer.oracleAddress }}
+- -lara_address
+- {{ .Values.indexer.laraAddress }}
+- -graphQLEndpoint
+- {{ .Values.indexer.graphQLEndpoint }}
+- -sync_queue_limit
+- '1'
+- -general_block_time
+- {{ .Values.indexer.generalBlockTime | quote }}
+{{- end }}
