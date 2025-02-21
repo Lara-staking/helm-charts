@@ -87,4 +87,6 @@ Indexer args
 - '1'
 - -general_block_time
 - {{ .Values.indexer.generalBlockTime | quote }}
+- -last_snapshot_id
+- {{ .Values.indexer.lastSnapshotId | quote }}
 {{- end }}

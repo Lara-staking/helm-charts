@@ -98,3 +98,4 @@ indexer:
   laraAddress: "0xa0ACAa383Aa22Eb0C93b115344C05409BBBE68d6"
   graphQLEndpoint: "https://indexer.prnet.taraxa.io/subgraphs/name/Liquid-staking/lara-subgraph"
   generalBlockTime: 3600
+  lastSnapshotId: 335
